@@ -1,5 +1,5 @@
-install:
-	poetry install
+build:
+		./build.sh
 
 dev:
 	poetry run uvicorn app.main:app --reload
