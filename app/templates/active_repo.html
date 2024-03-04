@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="flex-grow-1">
+    <div class="container-lg mt-3">
+        <h1>{{ repo_name }}</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover text-nowrap" data-test="urls">
+    <thead>
+    <tr>
+      <th>Date</th>
+      <th>Commits</th>
+      <th>Autors</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for info in commits %}
+        <tr>
+            <td>{{ info.date }}</td>
+            <td>{{ info.commits }}</td>
+            <td>{{ info.autors }}</td>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+    </div>
+  </main>
+{% endblock %}

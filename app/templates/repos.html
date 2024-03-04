@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="flex-grow-1">
+    <div class="container-lg mt-3">
+        <h1>Top 100</h1>
+    
+<div class="table-responsive">
+  <table class="table table-bordered table-hover text-nowrap" data-test="urls">
+    <thead>
+    <tr>
+      <th>Repo</th>
+      <th>Owner</th>
+      <th>position_cur</th>
+      <th>position_prev</th>
+      <th>stars</th>
+      <th>watchers</th>
+      <th>forks</th>
+      <th>open_issues</th>
+      <th>language</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for rep in repos %}
+        <tr>
+            <td>
+                <a href='/api/repos/{{ rep.repo }}/activity'>{{ rep.repo }}</a>
+            </td>
+            <td>{{ rep.owner }}</td>
+            <td>{{ rep.position_cur }}</td>
+            <td>{{ rep.position_prev }}</td>
+            <td>{{ rep.stars }}</td>
+            <td>{{ rep.watchers }}</td>
+            <td>{{ rep.forks }}</td>
+            <td>{{ rep.open_issues }}</td>
+            <td>{{ rep.language }}</td>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+    </div>
+  </main>
+{% endblock %}
