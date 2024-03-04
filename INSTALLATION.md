@@ -27,3 +27,8 @@ make start
 make dev
 
 ```
+3. Add to dimain push:
+```
+/api/repos/top100
+
+```
