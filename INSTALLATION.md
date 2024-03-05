@@ -13,7 +13,6 @@ cd Technical_task_by_TeamStroyIt && make build
 
 ```
 docker build . -t task_by_teamstroyit
-docker run task_by_teamstroyit python app/main.py
 
 ```
 4. Create a .env file that will contain your sensitive settings:
@@ -39,5 +38,10 @@ make dev
 3. Add to domain push:
 ```
 /api/repos/top100
+
+```
+4. Run through Docker:
+```
+docker run task_by_teamstroyit
 
 ```
