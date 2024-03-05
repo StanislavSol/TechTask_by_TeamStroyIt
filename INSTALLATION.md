@@ -9,7 +9,14 @@ git clone git@github.com:StanislavSol/Technical_task_by_TeamStroyIt.git
 cd Technical_task_by_TeamStroyIt && make build
 
 ```
-3. Create a .env file that will contain your sensitive settings:
+3. Go to the project directory and install dependencies using Docker:
+
+```
+docker build . -t task_by_teamstroyit
+docker run task_by_teamstroyit python app/main.py
+
+```
+4. Create a .env file that will contain your sensitive settings:
 ```
 DATABASE_URL = postgresql://{user}:{password}@{host}:{port}/{db}
 GITHUB_TOKEN = Токен личного доступа из настроек GitHub. Используется для запроса данных на GitHub.
