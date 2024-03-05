@@ -29,5 +29,7 @@ RESTful API приложение должно быть обернуто в docke
  - python 3.10+, PEP8
  - код должен быть безопасным, с обработчиками ошибок
 
+### [Демонстрация работы проекта](https://techtask-by-teamstroyit.onrender.com/api/repos/top100)
+
 ### Установка
  _[Инструкция для локального развертывания](INSTALLATION.md)_
