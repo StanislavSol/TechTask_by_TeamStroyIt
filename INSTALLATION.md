@@ -12,6 +12,7 @@ cd Technical_task_by_TeamStroyIt && make build
 3. Create a .env file that will contain your sensitive settings:
 ```
 DATABASE_URL = postgresql://{user}:{password}@{host}:{port}/{db}
+GITHUB_TOKEN = Токен личного доступа из [настроек GitHub](https://github.com/settings/tokens). Используется для запроса данных на GitHub.
 
 ```
 
@@ -27,7 +28,7 @@ make start
 make dev
 
 ```
-3. Add to dimain push:
+3. Add to domain push:
 ```
 /api/repos/top100
 
