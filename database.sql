@@ -15,6 +15,7 @@ CREATE TABLE top100 (
 
 CREATE TABLE repo_info (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    topId integer,
     date DATE,
     commits integer,
     autors text[]);

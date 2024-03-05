@@ -1,5 +1,5 @@
 build:
-		./build.sh
+	./build.sh
 
 dev:
 	poetry run uvicorn app.main:app --reload

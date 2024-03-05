@@ -27,12 +27,20 @@
             </td>
             <td>{{ rep.owner }}</td>
             <td>{{ rep.position_cur }}</td>
+            {% if rep.position_prev %}
             <td>{{ rep.position_prev }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
             <td>{{ rep.stars }}</td>
             <td>{{ rep.watchers }}</td>
             <td>{{ rep.forks }}</td>
             <td>{{ rep.open_issues }}</td>
+            {% if rep.language %}
             <td>{{ rep.language }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
         {% endfor %}
     </tbody>
   </table>

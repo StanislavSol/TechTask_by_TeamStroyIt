@@ -3,6 +3,8 @@ import psycopg2
 from contextlib import contextmanager
 
 
+INT_COMMIT = 1
+
 @contextmanager
 def create_connection(db_url):
     '''Получаем соединение с БД'''
@@ -108,40 +110,41 @@ def update_info_rep(
         )
 
 
-def get_info_by_commit(connection, date):
-    '''Извлекам данные об актиности репозитория по дате'''
+def get_info_by_commit(connection, topId, date):
+    '''Извлекам данные об актиности репозитория по дате и id репозитория'''
     with connection.cursor(cursor_factory=NamedTupleCursor) as curs:
         curs.execute('''SELECT commits
                      FROM repo_info
-                     WHERE date=%s;''', (date,))
+                     WHERE topId=%s AND date=%s;''', (topId, date, ))
         return curs.fetchone()
 
 
-def create_info_commit(connection, date, autor):
+def create_info_commit(connection, date, autor, topId):
     '''Вводим данные в таблицу repo_info'''
     with connection.cursor(cursor_factory=NamedTupleCursor) as curs:
-        curs.execute(f'''INSERT INTO repo_info (date, commits, autors)
-                     VALUES (%s, %s, '{'{'}{autor}{'}'}');''', (date, 1))
+        curs.execute(f'''INSERT INTO repo_info (date, commits, autors, topId)
+                     VALUES (%s, %s, '{'{'}{autor}{'}'}', %s);''', (date, INT_COMMIT, topId))
 
 
-def update_info_commit(connection, date, autor):
+def update_info_commit(connection, date, autor, id_commits):
     '''Обновляем данные в таблице repo_info'''
     with connection.cursor(cursor_factory=NamedTupleCursor) as curs:
         curs.execute(
            '''UPDATE repo_info
            SET commits=commits+1, autors=array_append(autors, %s)
-           WHERE date=%s''',
+           WHERE topId=%s''',
            (
                autor,
-               date,
+               id_commits,
            )
         )
 
 
-def get_commits(connection):
+def get_commits(connection, id_commits):
     with connection.cursor(cursor_factory=NamedTupleCursor) as curs:
         '''Извлекаем данные об активносити репозитория'''
-        curs.execute('''SELECT date, commits, autors
-                     FROM repo_info ORDER BY date DESC''')
+        curs.execute('''SELECT date, commits, ARRAY(SELECT DISTINCT * FROM unnest(autors))
+                     FROM repo_info WHERE topId=%s ORDER BY date DESC''',
+                     (id_commits,))
         context = curs.fetchall()
         return context
